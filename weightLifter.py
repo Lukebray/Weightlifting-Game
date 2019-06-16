@@ -10,31 +10,41 @@ class WeightLifter:
         self.clean_and_jerk_max = round((1.28 * self.bodyweight) + 40.63, 0)
         return(self.snatch_max, self.clean_and_jerk_max)
 
-
-class Attempt:
-    def __init__(self, weight):
-        self.weight = weight
-
-    def pass_or_fail(self):
-        factor = round(random.uniform(0,1), 2)
-        self.status = False
-        if factor > 0.5:
-            self.status = True
-        else:
-            self.status = False
-        return(self.status)
-
-
+lifters = []
 
 w1 = WeightLifter("Luke") 
 w1.calculateLifts()
+lifters.append(w1)
 print(w1.name)
 print("{}{}{}".format("Bodyweight: ", int(w1.bodyweight), "kg"))
 print("{}{}{}".format("Snatch: ", int(w1.snatch_max), "kg"))
 print("{}{}{}".format("Clean and Jerk: ", int(w1.clean_and_jerk_max), "kg"))
 
-a1 = Attempt(50)
-print(a1.pass_or_fail())
+def attempt_func():
+    remaining = 3
+    successes = []
+    fails = []
+    while remaining > 0:
+        att = int(input("What is att? "))
+        print(att)
+        factor = round(random.uniform(0,1), 2)
+        if factor > 0.5:
+            print("Good lift")
+            successes.append(att)
+            remaining = remaining - 1
+        else:
+            print("No lift")
+            fails.append(att)
+            remaining = remaining - 1
+    print("SUCCESSES", successes)
+    print("FAILS", fails)
+
+for x in lifters:
+    attempt_func()
+
+        
+
+
 
 
 
